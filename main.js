@@ -9,24 +9,7 @@ createApp({
       showPay:false,
       totalPedido: 0,
       optionPay: undefined,
-      products:[
-        { 'name': 'HotDogs',
-          'content' : [
-          {'id': 1, 'img': '', 'name': 'HotDog Sencillo', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 10000, 'cant':0 },
-          {'id': 2, 'img': '', 'name': 'HotDog Mediano', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 20000, 'cant':0 },
-          {'id': 3, 'img': '', 'name': 'HotDog Jumbo', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 30000, 'cant':0 },
-          {'id': 4, 'img': '', 'name': 'HotDog DobleCarne', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 40000, 'cant':0 },
-          ]
-        },
-        {'name': 'hamburger',
-          'content': [
-          {'id': 1, 'img': '', 'name': 'hamburger Sencilla', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 10000, 'cant':0 },
-          {'id': 2, 'img': '', 'name': 'hamburger Mediana', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 20000, 'cant':0 },
-          {'id': 3, 'img': '', 'name': 'hamburger Jumbo', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg':'hamburguesa sencilla muy rica' , 'price': 30000, 'cant':0 },
-          {'id': 4, 'img': '', 'name': 'hamburger DobleCarne', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 40000, 'cant':0 },
-          ]
-        }
-      ] , 
+      products:[] , 
     };
   },
   methods: {
@@ -40,21 +23,102 @@ createApp({
     },
     //cancelar orden 
     cancelOrder(){
-      this.orders.push({'id': this.orders.length, 'cart': this.cart, 'stattus': 'Cancelado', 'TotalPedido':0})
-      localStorage.setItem('orders', JSON.stringify(this.orders)) 
-      this.resetData()  
+      //si en el carrito hay mas de un producto se puede confirmar comprar
+      if(this.cart.length>0){
+        //sweet alers
+        Swal.fire({
+          title: '¿Cancelar Orden?',
+          text: "¿Está seguro de cancelar la orden?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, estoy seguro'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //logica
+            this.orders.push({'id': this.orders.length, 'cart': this.cart, 'stattus': 'Cancelado', 'TotalPedido':0})
+            localStorage.setItem('orders', JSON.stringify(this.orders)) 
+            this.resetData()  
+            
+            Swal.fire(
+              'Confirmado',
+              '¡Orden cancelada!',
+              'success'
+            )
+          }
+        })
+      }else{
+        Swal.fire(
+          'Carrito Vacío',
+          'Debes elegir al menos un producto',
+          'error'
+        )
+      }
     },
     //confirmar orden => abre pago
     confirmOrder(){  
-      this.showPay = true
-      console.log(this.showPay)
+    //si en el carrito hay mas de un producto se puede confirmar comprar
+    if(this.cart.length>0){
+       //sweet alers
+      Swal.fire({
+        title: 'Confirmar Orden',
+        text: "¿Está seguro de su orden?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, estoy seguro'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //logica
+          this.showPay = true
+          console.log(this.showPay)
+          
+           
+        }
+      })
+     }else{
+      Swal.fire(
+        'Carrito Vacío',
+        'Debes elegir al menos un producto',
+        'error'
+      )
+     }
     },
     //confirmar el pago
     comfirmPay(){
+      //se debe elegir una opcion de pago
       if(this.optionPay !== undefined){
-        this.orders.push({'id': this.orders.length, 'cart': this.cart, 'stattus': 'Pendiente', 'TotalPedido':this.TotalPedido})
-        localStorage.setItem('orders', JSON.stringify(this.orders)) 
-        this.resetData() 
+        //sweet alers
+        Swal.fire({
+          title: 'Confirmar Pago',
+          text: "¿Está seguro de realizar el pago?",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, estoy seguro'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //logica 
+            this.orders.push({'id': this.orders.length, 'cart': this.cart, 'stattus': 'Pendiente', 'TotalPedido':this.TotalPedido})
+            localStorage.setItem('orders', JSON.stringify(this.orders)) 
+            this.resetData() 
+            
+            Swal.fire(
+              'Confirmado',
+              'Pago realizada!',
+              'success'
+            )
+          }
+        })
+      }else{
+        Swal.fire(
+          'Selecciona un metodo de pago',
+          'Debe seleccionar el metodo de pago deseado',
+          'warning'
+        )
       }
     },
     //agregar producto al carrito
@@ -79,8 +143,8 @@ createApp({
         console.log(id, item.id-1)
         //console.log('No repetido ', this.cart)
       }
-      
-      //calculamos el total del pedido  
+       
+      localStorage.setItem('cart', JSON.stringify(this.cart)) 
     },
 
     //eliminar un producto del carrito de compras
@@ -97,7 +161,8 @@ createApp({
             }
           } 
         }
-      })  
+      })   
+      localStorage.setItem('cart', JSON.stringify(this.cart))
     },
 
     //reset data
@@ -108,8 +173,9 @@ createApp({
           product.cant=0
         })
       })
-      this.closeCart()
-      
+      this.showPay =false
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+      this.closeCart() 
     }
     
   },
@@ -123,12 +189,10 @@ createApp({
   },
   beforeCreate() {},
   mounted() {
-    //Traer la data del carrito en el local Storage
-    cartLs = JSON.parse(localStorage.getItem('cart'))
-
-    
-    //Traer la data de las ordenes en el local Storage
+    //Traer la data del carrito, los pedidos y los productos del local Storage
+    cartLs = JSON.parse(localStorage.getItem('cart'))  
     ordersLs = JSON.parse(localStorage.getItem('orders'))
+    productsLs = JSON.parse(localStorage.getItem('products'))
 
     //si hay data en el carrito pasa la variable Cart[]
     if(cartLs != null){
@@ -139,9 +203,37 @@ createApp({
     if(ordersLs != null){
       this.orders = ordersLs
     }
+
+    //si hay data en las ordenes pasa la variable Cart[]
+    if(productsLs != null){
+      this.products = productsLs
+    }else{
+      products=[
+        { 'name': 'HotDogs',
+          'content' : [
+          {'id': 1, 'img': '', 'name': 'HotDog Sencillo', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 10000, 'cant':0 },
+          {'id': 2, 'img': '', 'name': 'HotDog Mediano', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 20000, 'cant':0 },
+          {'id': 3, 'img': '', 'name': 'HotDog Jumbo', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 30000, 'cant':0 },
+          {'id': 4, 'img': '', 'name': 'HotDog DobleCarne', 'descriptionSm': 'Hot Dog sencill0 :v', 'descriptionLg': 'hot dog sencillo muy rica' , 'price': 40000, 'cant':0 },
+          ]
+        },
+        {'name': 'hamburger',
+          'content': [
+          {'id': 1, 'img': '', 'name': 'hamburger Sencilla', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 10000, 'cant':0 },
+          {'id': 2, 'img': '', 'name': 'hamburger Mediana', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 20000, 'cant':0 },
+          {'id': 3, 'img': '', 'name': 'hamburger Jumbo', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg':'hamburguesa sencilla muy rica' , 'price': 30000, 'cant':0 },
+          {'id': 4, 'img': '', 'name': 'hamburger DobleCarne', 'descriptionSm': 'hamburguesa sencilla :v', 'descriptionLg': 'hamburguesa sencilla muy rica' , 'price': 40000, 'cant':0 },
+          ]
+        }
+      ] 
+    }
  
      
   },
   beforeUpdate() {},
-  update() {},
+  update() {
+    localStorage.setItem('cart', JSON.stringify(this.cart))
+    localStorage.setItem('orders', JSON.stringify(this.orders)) 
+
+  },
 }).mount("#root");
