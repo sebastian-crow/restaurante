@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      proof: "hello world",
+      proof: "hello World",
     };
   },
   methods: {},
