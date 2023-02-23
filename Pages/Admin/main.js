@@ -13,7 +13,7 @@ createApp({
     };
   },
   methods: {
-    agregarUsuario() {
+    addProducts() {
       if (this.price <= 0) {
         swal("Error", "El precio no puede ser menor o igual que 0", "error");
       } else {
