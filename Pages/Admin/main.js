@@ -4,12 +4,7 @@ createApp({
   data() {
     return {
       orders: "",
-      type: "",
-      description: "",
-      product: [],
-      imagenSeleccionada: "",
-      price: "",
-      name:"",
+      products:[],
     };
   },
   methods: {
@@ -17,20 +12,29 @@ createApp({
       if (this.price <= 0) {
         swal("Error", "El precio no puede ser menor o igual que 0", "error");
       } else {
-        this.product.push({
-          name:this.name,
+        let newProduct = {
+          name: this.name,
           type: this.type,
           price: this.price,
-          description: this.description,
-          imagen: this.imagenSeleccionada,
-        });
-
-        localStorage.setItem("productos", JSON.stringify(this.product));
+          descriptionSm: this.descriptionSm,
+          img: this.img,
+          descriptionLg: this.descriptionLg,
+          cant:1,
+          id: this.id=Math.floor(Math.random() * 10),
+        };
+        if (this.type === "HotDogs") {
+          this.products[0].content.push(newProduct);
+        } else {
+          this.products[1].content.push(newProduct);
+        }
+        localStorage.setItem("products", JSON.stringify(this.products));
         this.type = "";
-         this.price = "";
-        this.description = "";
-        this.imagenSeleccionada = "";
-        this.name=""
+        this.price = "";
+        this.descriptionSm = "";
+        this.img = "";
+        this.name = "";
+        this.descriptionLg = "";
+        
       }
     },
 
@@ -38,7 +42,7 @@ createApp({
       const archivo = evento.target.files[0];
       const lector = new FileReader();
       lector.onload = () => {
-        this.imagenSeleccionada = lector.result;
+        this.img = lector.result;
       };
       lector.readAsDataURL(archivo);
     },
@@ -50,10 +54,14 @@ createApp({
     this.orders = JSON.parse(localStorage.getItem("orders"));
   },
   mounted() {
-    const listProduct = JSON.parse(localStorage.getItem("productos"));
+    const listProduct = JSON.parse(localStorage.getItem("products"));
     if (listProduct !== null) {
       this.product = listProduct;
     }
+  },
+
+  created(){
+    JSON.parse(localStorage.getItem("products")) != null ? this.products = JSON.parse(localStorage.getItem("products")) : localStorage.setItem("products", JSON.stringify(this.products));
   },
   beforeUpdate() {},
   update() {},

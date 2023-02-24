@@ -65,6 +65,6 @@ createApp({
     },
     created(){
       JSON.parse(localStorage.getItem("cart")) ? this.cart = JSON.parse(localStorage.getItem("cart")) : this.cart = [];
-      JSON.parse(localStorage.getItem("products")) != null ? this.arrayPets = JSON.parse(localStorage.getItem("products")) : localStorage.setItem("products", JSON.stringify(this.products));
+      JSON.parse(localStorage.getItem("products")) != null ? this.products = JSON.parse(localStorage.getItem("products")) : localStorage.setItem("products", JSON.stringify(this.products));
     }
   }).mount('#app')
