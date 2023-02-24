@@ -5,8 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -108,13 +112,13 @@
     <hr>
     <!-- Cards -->
     <div class="container">
-      <div class="row row-cols-1 row-cols-md-3 g-4">   
+      <div class="row row-cols-1 row-cols-md-3 g-4" data-bs-toggle="modal" data-bs-target="#exampleModal">   
         <div class="col" v-for="(c, index) in products[1].content" :key="c.id">
           <div class="col">
             <div class="card">
             <img :src="c.img" class="card-img-top"
               :alt="c.name" />
-            <div class="card-body">
+            <div class="card-body"data-toggle="modal" data-target="#staticBackdrop">
               <h2 class="font-card text-center col">{{c.name}}</h5>
                 <p class="card-text text-end"><b>Precio:</b> $ {{c.price}}</p>
               <div class="row">
@@ -140,6 +144,30 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="(c, index) in products[1].content" :key="c.id" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-center mt-2"> <img :src="c.img" width="200"> </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-white mt-4">
+                        <span class="intro-1">{{c.name}}</span>
+                        <div class="mt-2"> <span class="intro-2">{{c.descriptionSm}}</span> </div>
+                        <div class="mt-4 mb-5"> <button class="btn btn-primary">Agregar <i class="fa fa-cloud-cart-add"></i></button> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
     <!-- Cards -->
     <hr>
     <div class="mb-3">
@@ -181,6 +209,28 @@
       </div>
     </div>
     <!-- Cards -->
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="(c, index) in products[1].content" :key="c.id" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-center mt-2"> <img :src="c.img" width="200"> </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-white mt-4">
+                        <span class="intro-1">{{c.name}}</span>
+                        <div class="mt-2"> <span class="intro-2">{{c.descriptionSm}}</span> </div>
+                        <div class="mt-4 mb-5"> <button class="btn btn-primary">Agregar <i class="fa fa-cloud-cart-add"></i></button> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
   </div>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="./main.js"></script>
