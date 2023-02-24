@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -12,8 +11,8 @@
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.module.css">
-  <link rel="shortcut icon" href="/img/Logo Hamburguesa Comida Rápida Simple Negro.png">
+  <link rel="stylesheet" href="./style.module.css">
+  <link rel="shortcut icon" href="./img/Logo Hamburguesa Comida Rápida Simple Negro.png">
   <title>MixFood</title>
 </head>
 
@@ -36,9 +35,9 @@
                 <i class="fa-solid fa-check"></i></i>&nbsp;Login
               </a>
             </li>
-            <li class="nav-item" v-if="client[0].admin">
+            <li class="nav-item">
               <a class="nav-link d-flex align-items-center me-2" href="../Table/index.html">
-                <box-icon name='cart-alt' color='#ffffff' ></box-icon>&nbsp;Carrito
+                <span class="cart-number">&nbsp;{{getCartItems}}&nbsp;</span><box-icon name='cart-alt' color='#ffffff' ></box-icon>&nbsp;
               </a>
             </li>
           </ul>
@@ -47,7 +46,7 @@
           <a class="nav-link d-flex flex-row-reverse" style="color:white;" href="#!">&nbsp;</a>
         </div>
         <div class= "col" style="margin-right: 20px;">
-          <img class="rounded-circle" height="40" src="/img/Logo Hamburguesa Comida Rápida Simple Negro.png" loading="lazy"/>
+          <img class="rounded-circle" height="40" src="./img/Logo Hamburguesa Comida Rápida Simple Negro.png" loading="lazy"/>
       </div>
         <div class="col">
           <a class="btn text-white" style="background-color: #c61118;" @click="logout">
@@ -71,7 +70,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="img-container principal">
-              <img src="/img/vista-frontal-hamburguesas-stand.jpg" class="d-block w-100" alt="img1" />
+              <img src="./img/vista-frontal-hamburguesas-stand.jpg" class="d-block w-100" alt="img1" />
             </div>
             <div class="carousel-caption d-none d-md-block">
               <h5 class="font-slider">Hamburguesas</h5>
@@ -80,12 +79,12 @@
           </div>
           <div class="carousel-item">
             <div class="img-container">
-              <img src="/img/vista-lateral-salchicha-parrilla-hot-dog-ketchup-queso-cebolla-caramelizada-papas-fritas-mesa.jpg" class="d-block w-100" alt="img2" />
+              <img src="./img/perro2.jpg" class="d-block w-100" alt="img2" />
             </div>
           </div>
           <div class="carousel-item">
             <div class="img-container" style="margin-top: -150px;">
-              <img src="/img/vista-lateral-doble-hamburguesa-queso-empanadas-carne-parrilla-queso-hojas-lechuga-bollos.jpg" class="d-block w-100" alt="img3" />
+              <img src="./img/vista-lateral-doble-hamburguesa-queso-empanadas-carne-parrilla-queso-hojas-lechuga-bollos.jpg" class="d-block w-100" alt="img3" />
             </div>
           </div>
         </div>
@@ -101,35 +100,80 @@
         </button>
       </div>
     </div>
-    <!-- Carousel -->
+    <!-- NavBar   -->
+    <hr>
     <div class="mb-3">
-      <h1 class="font-pet text-center">Mascotas</h1>
+      <h1 id="hamburguer" class="font-slider text-center" style="color:whitesmoke;">Hamburguesas</h1>
+    </div>
+    <hr>
+    <!-- Cards -->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-4">   
+        <div class="col" v-for="(c, index) in products[1].content" :key="c.id">
+          <div class="col">
+            <div class="card">
+            <img :src="c.img" class="card-img-top"
+              :alt="c.name" />
+            <div class="card-body">
+              <h2 class="font-card text-center col">{{c.name}}</h5>
+                <p class="card-text text-end"><b>Precio:</b> $ {{c.price}}</p>
+              <div class="row">
+                <p class="card-text col"><b>Descripción:</b> {{c.descriptionSm}}</p>
+              </div>
+            </div>
+            <div class="row mt-1 mb-3 d-flex justify-content-center">
+              <div class="btn-group shadow-0 col-11" role="group">
+                <button type="button" class="btn btn-danger" @click.prevent="products[1].content[index].cant > 0 ? products[1].content[index].cant -- : null">-</button>
+                <div class="form-outline">
+                  <input type="number" id="typeNumber" class="form-control text-center" v-model="products[1].content[index].cant"/>
+                </div>
+                <button type="button" class="btn btn-success" @click.prevent="products[1].content[index].cant < 20 ? products[1].content[index].cant ++ : null">+</button>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="col-8">
+                  <button type="button" class="btn btn-primary btn-block mb-3 col-" @click="addProduct(c, 1)">Agregar</button>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Cards -->
+    <hr>
+    <div class="mb-3">
+      <h1 class="font-slider text-center" style="color:whitesmoke;">Hot Dogs</h1>
+    </div>
+    <hr>
+    <!-- Cards -->
     <div class="container ">
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col" v-for="(c, index) in arrayPets">
-          <div class="col" :id="index">
+      <div class="row row-cols-1 row-cols-md-3 g-4">   
+        <div class="col" v-for="(h, index) in products[0].content" :key="h.id">
+          <div class="col">
             <div class="card">
-              <img :src="c.img" class="card-img-top" :alt="c.name" />
+              <img :src="h.img" class="card-img-top"
+                :alt="h.name" />
               <div class="card-body">
-                <h2 class="font-card text-center">{{c.name}}</h5>
-                  <div class="row">
-                    <p class="card-text col"><b>Raza:</b> {{c.breed}}</p>
-                    <p class="card-text col"><b>Especie:</b> {{c.specie}}</p>
+                <h2 class="font-card text-center col">{{h.name}}</h5>
+                  <p class="card-text text-end"><b>Precio:</b> $ {{h.price}}</p>
+                <div class="row">
+                  <p class="card-text col"><b>Descripción:</b> {{h.descriptionSm}}</p>
+                </div>
+              </div>
+              <div class="row mt-3 mb-3 d-flex justify-content-center">
+                  <div class="btn-group shadow-0 col-11" role="group">
+                    <button type="button" class="btn btn-danger" @click.prevent="products[0].content[index].cant > 0 ? products[0].content[index].cant -- : null">-</button>
+                    <div class="form-outline">
+                      <input type="number" id="typeNumber" class="form-control text-center" v-model="products[0].content[index].cant"/>
+                    </div>
+                    <button type="button" class="btn btn-success" @click.prevent="products[0].content[index].cant < 20 ? products[0].content[index].cant ++ : null">+</button>
                   </div>
-                  <div class="row">
-                    <p class="card-text col"><b>Género:</b> {{c.gender}}</p>
-                    <p class="card-text col"><b>Color:</b> {{c.color}}</p>
-                  </div>
-                  <div class="row">
-                    <p class="card-text col"><b>Edad:</b> {{c.age}}</p>
-                  </div>
-                  <p class="card-text"><b>Descripción:</b> {{c.description}}</p>
-                  <div class="col">
-                    <button type="button" class="btn btn-primary btn-block mb-3 col-12"
-                      @click="adopt(index)">Adoptar</button>
-                  </div>
+                </div>
+              <div class="col d-flex justify-content-center">
+                <div class="col-8">
+                    <button type="button" class="btn btn-primary btn-block mb-3 col-" @click="addProduct(h, 0)">Agregar</button>
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +182,8 @@
     </div>
     <!-- Cards -->
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./main.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
