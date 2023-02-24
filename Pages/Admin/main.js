@@ -13,18 +13,23 @@ createApp({
         swal("Error", "El precio no puede ser menor o igual que 0", "error");
       } else {
         let newProduct = {
-          name: this.name,
-          type: this.type,
-          price: this.price,
-          descriptionSm: this.descriptionSm,
+          id:null,
           img: this.img,
+          name: this.name,
+          descriptionSm: this.descriptionSm,
           descriptionLg: this.descriptionLg,
+          price: this.price,
           cant:1,
-          id: this.id=Math.floor(Math.random() * 10),
+          
         };
         if (this.type === "HotDogs") {
+          newProduct.id = this.products[0].content.length + 1; // asignamos ID HotDogs
+      
           this.products[0].content.push(newProduct);
+
         } else {
+          newProduct.id = this.products[1].content.length + 1; // asignamos ID hamburguesa
+
           this.products[1].content.push(newProduct);
         }
         localStorage.setItem("products", JSON.stringify(this.products));
@@ -34,7 +39,7 @@ createApp({
         this.img = "";
         this.name = "";
         this.descriptionLg = "";
-        
+        swal("¡Producto agregado!", "El producto se ha guardado satisfactoriamente.", "success");
       }
     },
 
