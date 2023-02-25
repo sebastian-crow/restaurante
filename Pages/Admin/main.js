@@ -3,11 +3,16 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      admin: "hello world",
+      orders: "",
     };
   },
   methods: {},
-  beforeCreate() {},
+  beforeCreate() {
+    /*
+    funcion para cargar los datos almacenados en localStoragede de orders 
+    */
+    this.orders = JSON.parse(localStorage.getItem("orders"));
+  },
   mounted() {},
   beforeUpdate() {},
   update() {},
