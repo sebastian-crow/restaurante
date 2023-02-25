@@ -12,6 +12,7 @@ createApp({
         { username: "juanhorseadmin21", password: "hola123" },
         { username: "waiterjorge", password: "waiter123" },
       ],
+      user: "",
     };
   },
   methods: {
@@ -33,8 +34,16 @@ createApp({
       }
     },
   },
-  beforeCreate() {},
-  mounted() {},
+
+  beforeMount() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+  },
+  mounted() {
+    if (this.user) {
+      location.href = "../../index.html";
+    }
+  },
+  created() {},
   beforeUpdate() {},
   update() {},
 }).mount("#login");

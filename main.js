@@ -177,11 +177,12 @@ createApp({
   },
   beforeCreate() {
     this.cart = JSON.parse(localStorage.getItem("cart"));
-    JSON.parse(localStorage.getItem("products")) != null
-      ? (this.arrayPets = JSON.parse(localStorage.getItem("products")))
-      : localStorage.setItem("products", JSON.stringify(this.products));
+    const products = JSON.parse(localStorage.getItem("products"));
+    this.products = products ? products : this.products;
   },
-  mounted() {},
+  mounted() {
+    localStorage.setItem("products", JSON.stringify(this.products));
+  },
   beforeUpdate() {},
   update() {},
 }).mount("#root");
