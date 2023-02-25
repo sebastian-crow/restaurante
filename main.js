@@ -97,6 +97,7 @@ createApp({
       productDetails: null,
       index: null,
       id: null,
+      user: "",
     };
   },
   methods: {
@@ -129,8 +130,8 @@ createApp({
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     logout() {
-      localStorage.removeItem("username");
-      location.href = "../index.html";
+      localStorage.removeItem("user");
+      location.href = "index.html";
     },
     cantIncrement(id) {
       this.cart.filter((c) => {
@@ -182,6 +183,7 @@ createApp({
   },
   mounted() {
     localStorage.setItem("products", JSON.stringify(this.products));
+    this.user = JSON.parse(localStorage.getItem("user"));
   },
   beforeUpdate() {},
   update() {},
