@@ -50,10 +50,10 @@ createApp({
        this.orders = orders;
      },
      setTimeOrder(id) {
-       setTimeout(function () {
-         statusToPreparedOrder(id);
-       }, 900000); // 15 minutos
-     },
+      setTimeout(function () {
+        statusToPreparedOrder(id);
+      }, 60000); // 1 minutos
+    },
      // //Agregamos la funcion para cambiar el estado del pedido a entregado
       changeStatusOrder(id) {
        let orders = this.orders.map((order) =>
