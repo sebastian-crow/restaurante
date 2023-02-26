@@ -45,8 +45,13 @@
 
     <!-- Custom styles for this template -->
     <link href="../../Utils/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../style.module.css" />
     <!-- responsive style -->
     <link href="../../Utils/css/responsive.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/a919ab84a5.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body class="sub_page">
@@ -93,73 +98,295 @@
                   </li>
                 </ul>
                 <div class="user_option">
-                  <a href="" class="user_link">
+                  <a href="../Login/index.html" class="user_link">
                     <i class="fa fa-user" aria-hidden="true"></i>
                   </a>
-                  <a class="cart_link" href="#">
-                    <svg
-                      version="1.1"
-                      id="Capa_1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      x="0px"
-                      y="0px"
-                      viewBox="0 0 456.029 456.029"
-                      style="enable-background: new 0 0 456.029 456.029"
-                      xml:space="preserve"
+                  <a
+                    href="Pages/Admin/index.html"
+                    class="user_link"
+                    v-show="user"
+                  >
+                    <i class="fa-solid fa-lock"></i>
+                  </a>
+                  <a
+                    href="Pages/Chef/index.html"
+                    class="user_link"
+                    v-show="user"
+                  >
+                    <img
+                      src="Utils/images/chef.png"
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="18"
+                    />
+                  </a>
+                  <div data-mdb-toggle="tooltip" :title="getCartItems">
+                    <a
+                      class="cart_link"
+                      data-toggle="modal"
+                      data-target="#modal_aside_right"
+                      data-mdb-toggle="tooltip"
+                      :title="getCartItems"
                     >
-                      <g>
+                      <svg
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 456.029 456.029"
+                        style="enable-background: new 0 0 456.029 456.029"
+                        xml:space="preserve"
+                      >
                         <g>
-                          <path
-                            d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                          <g>
+                            <path
+                              d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
                    c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"
-                          />
+                            />
+                          </g>
                         </g>
-                      </g>
-                      <g>
                         <g>
-                          <path
-                            d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                          <g>
+                            <path
+                              d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
                    C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
                    c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
                    C457.728,97.71,450.56,86.958,439.296,84.91z"
-                          />
+                            />
+                          </g>
                         </g>
-                      </g>
-                      <g>
                         <g>
-                          <path
-                            d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                          <g>
+                            <path
+                              d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
                    c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"
-                          />
+                            />
+                          </g>
                         </g>
-                      </g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                      <g></g>
-                    </svg>
-                  </a>
-                  <form class="form-inline">
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                      </svg>
+                    </a>
+
+                    <div
+                      id="modal_aside_right"
+                      class="h-100 gradient-custom modal fixed-right fade"
+                      tabindex="-1"
+                      role="dialog"
+                    >
+                      <div
+                        class="w-100 py-5 modal-dialog modal-dialog-aside mx-xl-auto"
+                        role="document"
+                      >
+                        <div class="modal-content" style="border-radius: 16px">
+                          <div class="row d-flex justify-content-center my-4">
+                            <div class="col-md-8">
+                              <div class="card mb-4">
+                                <div class="card-header py-3 w">
+                                  <h5 class="mb-0">
+                                    Carrito {{getCartItems }} Items
+                                  </h5>
+                                </div>
+                                <div class="card-body">
+                                  <!-- Single item -->
+
+                                  <div
+                                    class="card rounded-3 mb-4"
+                                    v-for="(ca, index) in cart"
+                                    :key="ca.id"
+                                  >
+                                    <div class="card-body p-4">
+                                      <div
+                                        class="row d-flex justify-content-between align-items-center"
+                                      >
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                          <img
+                                            :src="ca.img"
+                                            class="img-fluid rounded-3"
+                                            alt="Cotton T-shirt"
+                                          />
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                          <p class="lead fw-normal mb-2">
+                                            {{ ca.name }}
+                                          </p>
+                                          <p>{{ ca.descriptionSm}}</p>
+                                        </div>
+                                        <div
+                                          class="col-md-3 col-xl-3 col-xl-2 d-flex"
+                                        >
+                                          <button
+                                            class="btn btn-link px-2"
+                                            @click="cantDecrement(ca.id)"
+                                          >
+                                            <i class="fas fa-minus"></i>
+                                          </button>
+
+                                          <input
+                                            :value="ca.cant"
+                                            id="form1"
+                                            min="0"
+                                            name="quantity"
+                                            type="number"
+                                            class="form-control text-center"
+                                          />
+
+                                          <button
+                                            class="btn btn-link px-2"
+                                            @click="cantIncrement(ca.id)"
+                                          >
+                                            <i class="fas fa-plus"></i>
+                                          </button>
+                                        </div>
+                                        <div
+                                          class="col-md-3 col-lg-2 col-xl-2 offset-lg-1"
+                                        >
+                                          <h5 class="mb-0">{{ ca.VU }} COP</h5>
+                                        </div>
+                                        <div
+                                          class="col-md-1 col-lg-1 col-xl-1 text-end"
+                                        >
+                                          <a
+                                            class="text-danger"
+                                            @click="deleteCartProduct(ca.id)"
+                                            ><i class="fas fa-trash fa-lg"></i
+                                          ></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Single item -->
+
+                                  <hr class="my-4" />
+
+                                  <!-- Single item -->
+                                </div>
+                              </div>
+                              <div class="card mb-4">
+                                <div class="card-body">
+                                  <p>
+                                    <strong
+                                      >Tiempo estimado para que recibas tu
+                                      pedido</strong
+                                    >
+                                  </p>
+                                  <p class="mb-0">30 Min</p>
+                                </div>
+                              </div>
+                              <div class="card mb-4 mb-lg-0">
+                                <div class="card-body">
+                                  <p><strong>Aceptamos</strong></p>
+                                  <img
+                                    class="me-2"
+                                    width="60"
+                                    src="https://w7.pngwing.com/pngs/400/28/png-transparent-credit-card-computer-icons-visa-electron-bank-curio-blue-text-rectangle.png"
+                                    alt="Visa"
+                                  />
+                                  <img
+                                    class="me-2"
+                                    width="60"
+                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                    alt="American Express"
+                                  />
+                                  <img
+                                    class="me-2"
+                                    width="60"
+                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                    alt="Mastercard"
+                                  />
+                                  <img
+                                    class="me-2"
+                                    width="60"
+                                    src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c530.png"
+                                    alt="PayPal acceptance mark"
+                                  />
+                                  <img
+                                    class="me-2"
+                                    width="60"
+                                    src="https://cdn.worldvectorlogo.com/logos/nequi-2.svg"
+                                    alt="Nequi"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="card mb-4">
+                                <div class="card-header py-3">
+                                  <h5 class="mb-0">Resumen</h5>
+                                </div>
+                                <div class="card-body">
+                                  <ul class="list-group list-group-flush">
+                                    <li
+                                      class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                                    >
+                                      Productos
+                                      <span>$53.98</span>
+                                    </li>
+                                    <li
+                                      class="list-group-item d-flex justify-content-between align-items-center px-0"
+                                    >
+                                      Envio
+                                      <span>Gratis</span>
+                                    </li>
+                                    <li
+                                      class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
+                                    >
+                                      <div>
+                                        <strong>Total</strong>
+                                        <strong>
+                                          <p class="mb-0">(incluido IVA 19%)</p>
+                                        </strong>
+                                      </div>
+                                      <span><strong>$53.98</strong></span>
+                                    </li>
+                                  </ul>
+
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary btn-lg btn-block"
+                                  >
+                                    Ordenar
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- modal.// -->
+
+                  <!--  <form class="form-inline">
                     <button
                       class="btn my-2 my-sm-0 nav_search-btn"
                       type="submit"
                     >
                       <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
-                  </form>
-                  <a href="" class="order_online"> Ordenar </a>
+                  </form> -->
+                  <a href="#" @click="logout" class="user_link" v-show="user">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </a>
+
+                  <a href="Pages/Checkout/index.html" class="order_online">
+                    Ordernar Online
+                  </a>
                 </div>
               </div>
             </nav>
