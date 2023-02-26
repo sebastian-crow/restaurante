@@ -4,13 +4,144 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesero</title>
+    <title>Waiter</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
+
   <body>
-    <div id="waiter">
-      <h1>{{ waiter }}</h1>
+    <div id="mesero">
+      <div class="container">
+        <div class="row bg-light d-flex text-center mb-1 rounded">
+          <h1 class="display-1">Mesero</h1>
+        </div>
+        <div class="row bg-dark text-white text-center mb-1 rounded">
+          <h1>Pedidos</h1>
+        </div>
+        <div class="row bg-light rounded mt-2 d-flex flex-wrap">
+          <div
+            class="col-lg-4 col-md-6 col-sm-12 rounded text-center mt-2 mb-2"
+            v-for="order of orders"
+          >
+            <div class="card">
+              <h1>Pedido No - {{order.id}}</h1>
+              <div class="card-body">
+                <div
+                  class="row d-flex flex-row mb-2"
+                  v-for="cart of order.cart"
+                >
+                  <div class="col rounded">
+                    <img
+                      v-bind:src="cart.img"
+                      v-bind:alt="cart.name"
+                      class="w-100 rounded"
+                    />
+                  </div>
+                  <div class="col d-flex flex-column m-1">
+                    <h3 class="mb-1" v-text="cart.name"></h3>
+                    <span class="badge bg-warning mb-1 text-dark"
+                      >Cantidad: {{ cart.cantidad }}</span
+                    >
+                    <span class="badge bg-warning mb-1 text-dark"
+                      >Valor unidad: $ {{cart.VU}}</span
+                    >
+                    <span class="badge bg-warning mb-1 text-dark"
+                      >Valor total: $ {{cart.VT}}</span
+                    >
+                  </div>
+                  <hr class="mt-4" />
+                </div>
+
+                <h1>Total: $ {{order.TotalPedido}}</h1>
+
+                <div class="d-flex flex-column">
+                  <button
+                    v-if="order.status== 'Pedido listo'"
+                    class="btn btn-danger m-2"
+                    v-bind:id="order.id"
+                    data-bs-toggle="modal"
+                    data-bs-target="#domiModal"
+                    class="dropdown-item"
+                    href="#"
+                    @click="isOrder(order.id)"
+                    v-text="order.status"
+                  ></button>
+                  <button
+                    v-else
+                    class="btn btn-primary m-2"
+                    v-bind:id="order.id"
+                    v-text="order.status"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row bg-light rounded mt-2 text-center" v-if="orders == ''">
+          <h1>No hay pedidos</h1>
+        </div>
+      </div>
+
+      <!-- Modificacion -->
+
+      <div
+        class="modal fade"
+        id="domiModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h1
+                class="modal-title text-white text-center"
+                id="exampleModalLabel"
+              >
+                Domiciliarios disponibles
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="d-flex flex-column p-1" v-for="dm of domiciliary">
+                <button
+                  class="btn btn-light mb-1"
+                  v-text="dm.name"
+                  v-show="dm.status == true"
+                  @click="isDomiciliary(dm.id)"
+                ></button>
+              </div>
+
+              <div class="d-flex flex-column p-1">
+                <button class="btn btn-primary mb-1" @click="sendOrder">
+                  Enviar domicilio
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- FIN MODAL -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="main.js"></script>
   </body>
 </html>
