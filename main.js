@@ -98,6 +98,8 @@ createApp({
       index: null,
       id: null,
       user: "",
+      order: "",
+      summary: "",
     };
   },
   methods: {
@@ -165,6 +167,24 @@ createApp({
       this.cart = cart;
       localStorage.setItem("cart", JSON.stringify(cart));
     },
+    summaryCart() {
+      const ammount = this.cart.map((c) => c.VU);
+      const summary = ammount.reduce((partialSum, a) => partialSum + a, 0);
+      return summary;
+    },
+    checkout() {
+      localStorage.setItem(
+        "checkout",
+        JSON.stringify({
+          id: Math.floor(Math.random() * Date.now()),
+          cart: this.cart,
+          total: this.summary + Math.floor((this.summary / 100) * 19),
+          status: "Pendiente",
+          paymant: false,
+        })
+      );
+      location.href = "Pages/Checkout/index.html";
+    },
   },
   computed: {
     getCartItems() {
@@ -180,11 +200,15 @@ createApp({
     this.cart = JSON.parse(localStorage.getItem("cart"));
     const products = JSON.parse(localStorage.getItem("products"));
     this.products = products ? products : this.products;
+    /*  this.summary = this.summaryCart(); */
   },
   mounted() {
     localStorage.setItem("products", JSON.stringify(this.products));
     this.user = JSON.parse(localStorage.getItem("user"));
   },
-  beforeUpdate() {},
+  beforeUpdate() {
+    this.cart = JSON.parse(localStorage.getItem("cart"));
+    this.summary = this.summaryCart();
+  },
   update() {},
 }).mount("#root");
