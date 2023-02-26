@@ -91,33 +91,64 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../About/index.html">About</a>
+                    <a class="nav-link" href="../About/index.html">Nosotros</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="../Book/index.html">Reservar</a>
                   </li>
                 </ul>
                 <div class="user_option">
-                  <a href="../Login/index.html" class="user_link">
+                  <a
+                    href="Pages/Login/index.html"
+                    class="user_link"
+                    v-show="!user"
+                  >
                     <i class="fa fa-user" aria-hidden="true"></i>
                   </a>
                   <a
-                    href="Pages/Admin/index.html"
+                    href="../Admin/index.html"
                     class="user_link"
                     v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Admin"
                   >
-                    <i class="fa-solid fa-lock"></i>
+                    <!--  <i class="fa-solid fa-lock"></i> -->
+                    <img
+                      src="../../Utils/images/icons8-user-shield-90.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
+                    />
                   </a>
                   <a
-                    href="Pages/Chef/index.html"
+                    href="../Chef/index.html"
                     class="user_link"
                     v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Chef"
                   >
                     <img
-                      src="Utils/images/chef.png"
+                      src="../../Utils/images/chef.png"
                       class="fa mb-lg-1"
                       alt=""
                       width="18"
+                    />
+                  </a>
+                  <a
+                    href="../Waiter/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Mesero/a"
+                  >
+                    <!--  <i class="fa-solid fa-lock"></i> -->
+                    <img
+                      src="../../Utils/images/camarero.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
                     />
                   </a>
                   <div data-mdb-toggle="tooltip" :title="getCartItems">
@@ -380,12 +411,19 @@
                       <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                   </form> -->
-                  <a href="#" @click="logout" class="user_link" v-show="user">
+                  <a
+                    href="#"
+                    @click="logout"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Salir"
+                  >
                     <i class="fa-solid fa-right-from-bracket"></i>
                   </a>
 
-                  <a href="Pages/Checkout/index.html" class="order_online">
-                    Ordernar Online
+                  <a href="../Checkout/index.html" class="order_online">
+                    Ordenar Online
                   </a>
                 </div>
               </div>

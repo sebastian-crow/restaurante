@@ -47,6 +47,11 @@
     <link href="../../Utils/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="../../Utils/css/responsive.css" rel="stylesheet" />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/a919ab84a5.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body class="sub_page">
@@ -84,7 +89,7 @@
                     <a class="nav-link" href="../Menu/index.html">Menu</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../About/index.html">About</a>
+                    <a class="nav-link" href="../About/index.html">Nosotros</a>
                   </li>
                   <li class="nav-item active">
                     <a class="nav-link" href="#"
@@ -93,13 +98,36 @@
                   </li>
                 </ul>
                 <div class="user_option">
-                  <a href="../Login/index.html" class="user_link">
+                  <a
+                    href="Pages/Login/index.html"
+                    class="user_link"
+                    v-show="!user"
+                  >
                     <i class="fa fa-user" aria-hidden="true"></i>
                   </a>
-                  <a href="../Admin/index.html" class="user_link" v-show="user">
-                    <i class="fa-solid fa-lock"></i>
+                  <a
+                    href="../Admin/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Admin"
+                  >
+                    <!--  <i class="fa-solid fa-lock"></i> -->
+                    <img
+                      src="../../Utils/images/icons8-user-shield-90.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
+                    />
                   </a>
-                  <a href="../Chef/index.html" class="user_link" v-show="user">
+                  <a
+                    href="../Chef/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Chef"
+                  >
                     <img
                       src="../../Utils/images/chef.png"
                       class="fa mb-lg-1"
@@ -107,12 +135,46 @@
                       width="18"
                     />
                   </a>
-                  <a href="#" @click="logout" class="user_link" v-show="user">
+                  <a
+                    href="../Waiter/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Mesero/a"
+                  >
+                    <!--  <i class="fa-solid fa-lock"></i> -->
+                    <img
+                      src="../../Utils/images/camarero.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
+                    />
+                  </a>
+
+                  <!-- modal.// -->
+
+                  <!--  <form class="form-inline">
+                    <button
+                      class="btn my-2 my-sm-0 nav_search-btn"
+                      type="submit"
+                    >
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                  </form> -->
+                  <a
+                    href="#"
+                    @click="logout"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Salir"
+                  >
                     <i class="fa-solid fa-right-from-bracket"></i>
                   </a>
 
                   <a href="../Checkout/index.html" class="order_online">
-                    Ordernar Online
+                    Ordenar Online
                   </a>
                 </div>
               </div>

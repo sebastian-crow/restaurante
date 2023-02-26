@@ -7,7 +7,12 @@ createApp({
       user: "",
     };
   },
-  methods: {},
+  methods: {
+    logout() {
+      localStorage.removeItem("user");
+      location.href = "../../index.html";
+    },
+  },
   computed: {},
   beforeCreate() {},
   mounted() {
