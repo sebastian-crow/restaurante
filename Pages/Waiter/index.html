@@ -1,147 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <!-- Basic -->
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesero</title>
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="../../Utils/images/favicon.png" type="" />
+
+    <title>MixFood</title>
+
+    <!-- Vue-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- bootstrap core css -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      type="text/css"
+      href="../../Utils/css/bootstrap.css"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <!-- nice select  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+      integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
       crossorigin="anonymous"
     />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- font awesome style -->
+    <link href="../../Utils/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="../../Utils/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../../Utils/css/responsive.css" rel="stylesheet" />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/a919ab84a5.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
-  <body>
+  <body class="sub_page">
     <div id="mesero">
-      <div class="container">
-        <div class="row bg-light d-flex text-center mb-1 rounded">
-          <h1 class="display-1">Mesero</h1>
+      <div class="hero_area">
+        <div class="bg-box">
+          <img src="../../Utils/images/hero-bg.jpg" alt="" />
         </div>
-        <div class="row bg-dark text-white text-center mb-1 rounded">
-          <h1>Pedidos</h1>
-        </div>
-        <div class="row bg-light rounded mt-2 d-flex flex-wrap">
-          <div
-            class="col-lg-4 col-md-6 col-sm-12 rounded text-center mt-2 mb-2"
-            v-for="order of orders"
-          >
-            <div class="card">
-              <h1>Pedido No - {{order.id}}</h1>
-              <div class="card-body">
-                <div
-                  class="row d-flex flex-row mb-2"
-                  v-for="cart of order.cart"
-                >
-                  <div class="col rounded">
+        <!-- header section strats -->
+        <header class="header_section">
+          <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+              <a class="navbar-brand" href="../../index.html">
+                <span> MixFood </span>
+              </a>
+
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class=""> </span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../../index.html">Inicio </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../Menu/index.html">Menu</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"
+                      >Nosotros <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../Book/index.html">Reservar</a>
+                  </li>
+                </ul>
+                <div class="user_option">
+                  <a
+                    href="../Login/index.html"
+                    class="user_link"
+                    v-show="!user"
+                  >
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </a>
+                  <a
+                    href="../Admin/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Admin"
+                  >
+                    <!--  <i class="fa-solid fa-lock"></i> -->
                     <img
-                      v-bind:src="cart.img"
-                      v-bind:alt="cart.name"
-                      class="w-100 rounded"
+                      src="../../Utils/images/icons8-user-shield-90.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
                     />
-                  </div>
-                  <div class="col d-flex flex-column m-1">
-                    <h3 class="mb-1" v-text="cart.name"></h3>
-                    <span class="badge bg-warning mb-1 text-dark"
-                      >Cantidad: {{ cart.cantidad }}</span
-                    >
-                    <span class="badge bg-warning mb-1 text-dark"
-                      >Valor unidad: $ {{cart.VU}}</span
-                    >
-                    <span class="badge bg-warning mb-1 text-dark"
-                      >Valor total: $ {{cart.VT}}</span
-                    >
-                  </div>
-                  <hr class="mt-4" />
-                </div>
+                  </a>
+                  <a
+                    href="../Chef/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Chef"
+                  >
+                    <img
+                      src="../../Utils/images/chef.png"
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="18"
+                    />
+                  </a>
+                  <a
+                    href="../Waiter/index.html"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Mesero/a"
+                  >
+                    <!--  <i class="fa-solid fa-lock"></i> -->
+                    <img
+                      src="../../Utils/images/camarero.png"
+                      alt=""
+                      class="fa mb-lg-1"
+                      alt=""
+                      width="20"
+                    />
+                  </a>
 
-                <h1>Total: $ {{order.TotalPedido}}</h1>
+                  <!-- modal.// -->
 
-                <div class="d-flex flex-column">
-                  <button
-                    v-if="order.status== 'Pedido listo'"
-                    class="btn btn-danger m-2"
-                    v-bind:id="order.id"
-                    data-bs-toggle="modal"
-                    data-bs-target="#domiModal"
-                    class="dropdown-item"
+                  <!--  <form class="form-inline">
+                    <button
+                      class="btn my-2 my-sm-0 nav_search-btn"
+                      type="submit"
+                    >
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                  </form> -->
+                  <a
                     href="#"
-                    @click="isOrder(order.id)"
-                    v-text="order.status"
-                  ></button>
-                  <button
-                    v-else
-                    class="btn btn-primary m-2"
-                    v-bind:id="order.id"
-                    v-text="order.status"
-                  ></button>
+                    @click="logout"
+                    class="user_link"
+                    v-show="user"
+                    data-mdb-toggle="tooltip"
+                    title="Salir"
+                  >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </a>
+
+                  <a href="../Checkout/index.html" class="order_online">
+                    Ordenar Online
+                  </a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <!-- end header section -->
+      </div>
+
+      <!-- about section -->
+
+      <section class="layout_padding">
+        <div class="container">
+          <div class="row bg-light d-flex text-center mb-1 rounded">
+            <h1 class="display-1">Mesero</h1>
+          </div>
+          <div class="row bg-dark text-white text-center mb-1 rounded">
+            <h1>Pedidos</h1>
+          </div>
+          <div class="row bg-light rounded mt-2 d-flex flex-wrap">
+            <div
+              class="col-lg-4 col-md-6 col-sm-12 rounded text-center mt-2 mb-2"
+              v-for="order of orders"
+            >
+              <div class="card">
+                <h1>Pedido No - {{order.id}}</h1>
+                <div class="card-body">
+                  <div
+                    class="row d-flex flex-row mb-2"
+                    v-for="cart of order.cart"
+                  >
+                    <div class="col rounded">
+                      <img
+                        v-bind:src="`../../${cart.img}`"
+                        v-bind:alt="cart.name"
+                        class="w-100 rounded"
+                      />
+                    </div>
+                    <div class="col d-flex flex-column m-1">
+                      <h3 class="mb-1" v-text="cart.name"></h3>
+                      <span class="badge bg-warning mb-1 text-dark"
+                        >Cantidad: {{ cart.cant }}</span
+                      >
+                      <span class="badge bg-warning mb-1 text-dark"
+                        >Valor unidad: $ {{cart.VU}}</span
+                      >
+                      <span class="badge bg-warning mb-1 text-dark"
+                        >Valor total: $ {{cart.VT}}</span
+                      >
+                    </div>
+                    <hr class="mt-4" />
+                  </div>
+
+                  <h1>Total: $ {{order.total}}</h1>
+
+                  <div class="d-flex flex-column">
+                    <button
+                      v-if="order.status== 'Pedido listo'"
+                      class="btn btn-danger m-2"
+                      v-bind:id="order.id"
+                      data-bs-toggle="modal"
+                      data-bs-target="#domiModal"
+                      class="dropdown-item"
+                      href="#"
+                      @click="isOrder(order.id)"
+                      v-text="order.status"
+                    ></button>
+                    <button
+                      v-else
+                      class="btn btn-primary m-2"
+                      v-bind:id="order.id"
+                      v-text="order.status"
+                    ></button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div
+            class="row bg-light rounded mt-2 text-center"
+            v-if="orders == ''"
+          >
+            <h1>No hay pedidos</h1>
+          </div>
         </div>
-        <div class="row bg-light rounded mt-2 text-center" v-if="orders == ''">
-          <h1>No hay pedidos</h1>
-        </div>
-      </div>
 
-      <!-- Modificacion -->
+        <!-- Modificacion -->
 
-      <div
-        class="modal fade"
-        id="domiModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content bg-dark">
-            <div class="modal-header">
-              <h1
-                class="modal-title text-white text-center"
-                id="exampleModalLabel"
-              >
-                Domiciliarios disponibles
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-
-            <div class="modal-body">
-              <div class="d-flex flex-column p-1" v-for="dm of domiciliary">
+        <div
+          class="modal fade"
+          id="domiModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+              <div class="modal-header">
+                <h1
+                  class="modal-title text-white text-center"
+                  id="exampleModalLabel"
+                >
+                  Domiciliarios disponibles
+                </h1>
                 <button
-                  class="btn btn-light mb-1"
-                  v-text="dm.name"
-                  v-show="dm.status == true"
-                  @click="isDomiciliary(dm.id)"
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                 ></button>
               </div>
 
-              <div class="d-flex flex-column p-1">
-                <button class="btn btn-primary mb-1" @click="sendOrder">
-                  Enviar domicilio
-                </button>
+              <div class="modal-body">
+                <div class="d-flex flex-column p-1" v-for="dm of domiciliary">
+                  <button
+                    class="btn btn-light mb-1"
+                    v-text="dm.name"
+                    v-show="dm.status == true"
+                    @click="isDomiciliary(dm.id)"
+                  ></button>
+                </div>
+
+                <div class="d-flex flex-column p-1">
+                  <button class="btn btn-primary mb-1" @click="sendOrder">
+                    Enviar domicilio
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- end about section -->
+
+      <!-- footer section -->
+      <footer class="footer_section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 footer-col">
+              <div class="footer_contact">
+                <h4>Contact Us</h4>
+                <div class="contact_link_box">
+                  <a href="">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <span> Location </span>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <span> Call +01 1234567890 </span>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <span> demo@gmail.com </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 footer-col">
+              <div class="footer_detail">
+                <a href="" class="footer-logo"> MixFood </a>
+                <p>
+                  Necessary, making this the first true generator on the
+                  Internet. It uses a dictionary of over 200 Latin words,
+                  combined with
+                </p>
+                <div class="footer_social">
+                  <a href="">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                  </a>
+                  <a href="">
+                    <i class="fa fa-pinterest" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 footer-col">
+              <h4>Opening Hours</h4>
+              <p>Everyday</p>
+              <p>10.00 Am -10.00 Pm</p>
+            </div>
+          </div>
+          <div class="footer-info">
+            <p>
+              &copy; <span id="displayYear"></span> All Rights Reserved By
+              <a href="#">MixFood</a><br /><br />
+              &copy; <span id="displayYear"></span> Distributed By
+              <a href="../../index.html" target="_blank">MixFood</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+      <!-- footer section -->
     </div>
 
-    <!-- FIN MODAL -->
-
+    <!-- jQery -->
+    <script src="../../Utils/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
     ></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- bootstrap js -->
+    <script src="../../Utils/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <!-- custom js -->
+    <script src="../../Utils/js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- End Google Map -->
     <script src="main.js"></script>
+    <!-- Vuejs main code -->
   </body>
 </html>

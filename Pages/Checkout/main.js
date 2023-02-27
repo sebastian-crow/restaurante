@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      orders: [],
       isLogged: false,
       index: null,
       id: null,
@@ -27,42 +28,38 @@ createApp({
         id: this.checkout.id,
         payment: true,
         status: "Pendiente",
+        cart: this.checkout.cart,
         total: this.checkout.total - this.cupon,
       };
       if (
-        this.input.creditCard.number !== "" &&
-        this.input.ownerNumber !== "" &&
-        this.input.dueDate !== "" &&
-        this.input.cvvCode !== ""
+        (this.input.creditCard.number !== "" &&
+          this.input.ownerNumber !== "" &&
+          this.input.dueDate !== "" &&
+          this.input.cvvCode !== "") ||
+        this.input.paypal !== ""
       ) {
         alert("Esperando validación del pago por parte del banco");
-      }
-      if (this.input.paypal !== "") {
-        alert("Seras redirigido a la pasarela de pagos de paypal");
-        window.open("https://www.paypal.com", "_blank");
-      } else {
-        alert("Seras redirigido a la pasarela de pagos de nequi");
-        window.open("https://www.nequi.com", "_blank");
-      }
-      if (this.orders?.length >= 0) {
         localStorage.setItem(
           "orders",
           JSON.stringify([...this.orders, newOrder])
         );
+        localStorage.removeItem("checkout");
+        localStorage.removeItem("cart");
+        /* window.open("https://www.paypal.com", "_blank"); */
+        location.href = "../../index.html";
       }
-      localStorage.setItem("orders", JSON.stringify(newOrder));
     },
   },
 
   computed: {},
-  beforeCreate() {
-    this.orders = JSON.parse(localStorage.getItem("orders"));
-  },
+  beforeCreate() {},
   mounted() {
-    
     this.checkout = JSON.parse(localStorage.getItem("checkout"));
     this.user = JSON.parse(localStorage.getItem("user"));
   },
-  beforeUpdate() {},
+  beforeUpdate() {
+    const orders = JSON.parse(localStorage.getItem("orders"));
+    this.orders = orders ? orders : [];
+  },
   update() {},
 }).mount("#checkout");

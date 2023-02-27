@@ -4,6 +4,7 @@ createApp({
   data() {
     return {
       orders: "",
+      user: "",
     };
   },
   methods: {
@@ -21,11 +22,13 @@ createApp({
       this.orders = orders;
     },
   },
-  beforeCreate() {
+  beforeCreate() {},
+  beforeMount() {
     /*
-    funcion para cargar los datos almacenados en localStoragede de orders 
+    funcion para cargar los datos almacenados en localStorage de orders 
     */
     this.orders = JSON.parse(localStorage.getItem("orders"));
+    this.user = JSON.parse(localStorage.getItem("user"));
   },
   mounted() {},
   beforeUpdate() {},

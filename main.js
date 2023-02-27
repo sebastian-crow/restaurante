@@ -104,11 +104,13 @@ createApp({
   },
   methods: {
     //agregar producto al carrito
-    addProduct(item, id) {
+    async addProduct(item, id) {
       //pregunttar si ya existe
-      const result = this.cart.filter((product) => product.name === item.name);
+      const result = await this.cart?.filter(
+        (product) => product.name === item.name
+      );
       //si este ya existe su cantidad aumenta en lo que se le ingrese en el input y su valor total aumenta en base a la cantida
-      if (result.length > 0) {
+      if (result?.length > 0) {
         this.cart.map((product) => {
           if (item.name === product.name) {
             product.cant += this.products[id].content[item.id - 1].cant;
@@ -168,8 +170,8 @@ createApp({
       localStorage.setItem("cart", JSON.stringify(cart));
     },
     summaryCart() {
-      const ammount = this.cart.map((c) => c.VU);
-      const summary = ammount.reduce((partialSum, a) => partialSum + a, 0);
+      const ammount = this.cart?.map((c) => c.VU);
+      const summary = ammount?.reduce((partialSum, a) => partialSum + a, 0);
       return summary;
     },
     checkout() {
@@ -189,7 +191,7 @@ createApp({
   computed: {
     getCartItems() {
       let totalProducts = 0;
-      this.cart.forEach((e) => {
+      this.cart?.forEach((e) => {
         totalProducts += e.cant;
       });
       let result = totalProducts < 10 ? totalProducts : "9+";
@@ -197,17 +199,19 @@ createApp({
     },
   },
   beforeCreate() {
-    this.cart = JSON.parse(localStorage.getItem("cart"));
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    this.cart = cart ? cart : [];
+
     const products = JSON.parse(localStorage.getItem("products"));
     this.products = products ? products : this.products;
-    /*  this.summary = this.summaryCart(); */
   },
   mounted() {
     localStorage.setItem("products", JSON.stringify(this.products));
     this.user = JSON.parse(localStorage.getItem("user"));
   },
   beforeUpdate() {
-    this.cart = JSON.parse(localStorage.getItem("cart"));
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    this.cart = cart ? cart : [];
     this.summary = this.summaryCart();
   },
   update() {},

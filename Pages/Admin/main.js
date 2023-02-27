@@ -3,8 +3,9 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      orders: "",
+      orders: [],
       products: [],
+      user: "",
     };
   },
   methods: {
@@ -54,13 +55,15 @@ createApp({
       lector.readAsDataURL(archivo);
     },
   },
-  beforeCreate() {
+  beforeCreate() {},
+  beforeMount() {
     /*
     funcion para cargar los datos almacenados en localStoragede de orders 
     */
     this.orders = JSON.parse(localStorage.getItem("orders"));
   },
   mounted() {
+    console.log(this.orders);
     const listProduct = JSON.parse(localStorage.getItem("products"));
     if (listProduct !== null) {
       this.product = listProduct;
@@ -68,6 +71,7 @@ createApp({
   },
 
   created() {
+    this.user = JSON.parse(localStorage.getItem("user"));
     JSON.parse(localStorage.getItem("products")) != null
       ? (this.products = JSON.parse(localStorage.getItem("products")))
       : localStorage.setItem("products", JSON.stringify(this.products));
