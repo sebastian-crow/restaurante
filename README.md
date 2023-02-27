@@ -46,7 +46,7 @@ MIT
 > [SebastianCrow](https://github.com/sebastian-crow) <br> 
 > [Andersson Cordoba](https://github.com/andersson980114)  
 > [Camilo Burbano](https://github.com/CamiloBurbano82)  <br> 
-> [Jean Carlos Carrillo](https://github.com/jeanc4rl02) 
+> [Jean Carlos Carrillo](https://github.com/jeanc4rl02) <br> 
 > [Juan Gomez](https://github.com/JuansMgb) 
 > [Luis Marín](https://github.com/Marin28c1997) 
 > [Vannesa Jaimes](https://github.com/VanessaJaimes)
