@@ -33,7 +33,7 @@ $ open index.html
 ## Live Demo
 
 ```bash
- # Netlify
+ # Github Pages
  $ https://sebastian-crow.github.io/restaurante
 ```
 
