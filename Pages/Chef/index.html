@@ -216,7 +216,7 @@
                     <div class="col d-flex flex-column m-1">
                       <h3 class="mb-1" v-text="cart.name"></h3>
                       <span class="badge bg-warning mb-1 text-dark"
-                        >Cantidad: {{ cart.cantidad }}</span
+                        >Cantidad: {{ cart.cant }}</span
                       >
                       <span class="badge bg-warning mb-1 text-dark"
                         >Valor unidad: $ {{cart.VU}}</span
@@ -228,14 +228,14 @@
                     <hr class="mt-4" />
                   </div>
 
-                  <h1>Total: $ {{order.TotalPedido}}</h1>
+                  <h1>Total: $ {{order.total}}</h1>
 
                   <button
                     v-if="order.status== 'Pendiente'"
                     class="btn btn-danger mb-2"
                     v-bind:id="order.id"
                     v-text="order.status"
-                    @click="statusToPreparedOrder(order.id)"
+                    @click="changeStatus(order.id)"
                   ></button>
                   <button
                     v-else

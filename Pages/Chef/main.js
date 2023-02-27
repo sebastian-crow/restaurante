@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      orders: "",
+      orders: [],
       user: "",
     };
   },
@@ -21,13 +21,25 @@ createApp({
       localStorage.setItem("orders", JSON.stringify(orders));
       this.orders = orders;
     },
+    changeStatus(id) {
+      const orders = JSON.parse(JSON.stringify(this.orders));
+      const orderStateUpdated = orders.map((order) => {
+        if (order.id === id) {
+          order.status = "Pedido listo";
+          return order;
+        }
+      });
+      this.orders = orderStateUpdated;
+      localStorage.setItem("orders", JSON.stringify(orderStateUpdated));
+    },
   },
   beforeCreate() {},
   beforeMount() {
     /*
     funcion para cargar los datos almacenados en localStorage de orders 
     */
-    this.orders = JSON.parse(localStorage.getItem("orders"));
+    const orders = JSON.parse(localStorage.getItem("orders"));
+    this.orders = orders ? orders : [];
     this.user = JSON.parse(localStorage.getItem("user"));
   },
   mounted() {},
