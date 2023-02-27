@@ -20,6 +20,8 @@
     <!-- Vue-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ -->
     <!-- bootstrap core css -->
     <link
       rel="stylesheet"
@@ -268,11 +270,12 @@
         <!------------------------------------------------------>
 
         <!-- Formulario-->
-        <div
-          class="position-relative py-4 px-4 text-bg-dark border border-dark contenedors"
-        >
-          <h2 class="text-center">DATOS DEL PRODUCTO</h2>
-          <form @submit.prevent="addProducts">
+      </section>
+
+      <section class="layout_padding m-lg-4">
+        <div class="w-100 py-4 px-4 text-bg-dark border border-dark">
+          <h2 class="text-center">AGREGAR PRODUCTO</h2>
+          <div>
             <div class="form-row">
               <div class="form-group">
                 <label for="type">Tipo</label>
@@ -334,12 +337,18 @@
                 required
                 class="form-control-file"
               />
+              <br />
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-          </form>
+            <button
+              type="submit"
+              class="btn btn-primary mt-3"
+              @click="addProducts"
+            >
+              Guardar
+            </button>
+          </div>
         </div>
       </section>
-
       <!-- end about section -->
 
       <!-- footer section -->

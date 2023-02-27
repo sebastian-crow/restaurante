@@ -11,7 +11,7 @@ createApp({
   methods: {
     addProducts() {
       if (this.price <= 0) {
-        swal("Error", "El precio no puede ser menor o igual que 0", "error");
+        alert("Error", "El precio no puede ser menor o igual que 0", "error");
       } else {
         let newProduct = {
           id: null,
@@ -38,7 +38,7 @@ createApp({
         this.img = "";
         this.name = "";
         this.descriptionLg = "";
-        swal(
+        alert(
           "¡Producto agregado!",
           "El producto se ha guardado satisfactoriamente.",
           "success"
@@ -68,7 +68,6 @@ createApp({
     this.orders = JSON.parse(localStorage.getItem("orders"));
   },
   mounted() {
-    console.log(this.orders);
     const listProduct = JSON.parse(localStorage.getItem("products"));
     if (listProduct !== null) {
       this.product = listProduct;
