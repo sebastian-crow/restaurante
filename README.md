@@ -48,5 +48,5 @@ MIT
 > [Camilo Burbano](https://github.com/CamiloBurbano82)  <br> 
 > [Jean Carlos Carrillo](https://github.com/jeanc4rl02) <br> 
 > [Juan Gomez](https://github.com/JuansMgb) 
-> [Luis Marín](https://github.com/Marin28c1997) 
+> [Luis Marín](https://github.com/Marin28c1997) <br> 
 > [Vannesa Jaimes](https://github.com/VanessaJaimes)
