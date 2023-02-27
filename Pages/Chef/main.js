@@ -28,6 +28,7 @@ createApp({
           order.status = "Pedido listo";
           return order;
         }
+        return order;
       });
       this.orders = orderStateUpdated;
       localStorage.setItem("orders", JSON.stringify(orderStateUpdated));
@@ -42,7 +43,9 @@ createApp({
     this.orders = orders ? orders : [];
     this.user = JSON.parse(localStorage.getItem("user"));
   },
-  mounted() {},
+  mounted() {
+    if (!this.user) location.href = "../../index.html";
+  },
   beforeUpdate() {},
   update() {},
 }).mount("#chef");

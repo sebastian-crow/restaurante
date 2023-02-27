@@ -38,15 +38,26 @@ createApp({
           this.input.cvvCode !== "") ||
         this.input.paypal !== ""
       ) {
-        alert("Esperando validación del pago por parte del banco");
         localStorage.setItem(
           "orders",
           JSON.stringify([...this.orders, newOrder])
         );
         localStorage.removeItem("checkout");
         localStorage.removeItem("cart");
+        Swal.fire({
+          title: `Orden creada correctamente, tu pedido sera despachado en breve`,
+          width: 600,
+          padding: "3em",
+          color: "white",
+          background: "#272B33",
+          backdrop: `
+            rgba(0,176,200,0.4)
+            left top
+            no-repeat
+          `,
+        });
         /* window.open("https://www.paypal.com", "_blank"); */
-        location.href = "../../index.html";
+        setTimeout(() => (location.href = "../../index.html"), 2000);
       }
     },
   },

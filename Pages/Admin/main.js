@@ -46,6 +46,11 @@ createApp({
       }
     },
 
+    logout() {
+      localStorage.removeItem("user");
+      location.href = "index.html";
+    },
+
     seleccionarImagenPredeterminada(evento) {
       const archivo = evento.target.files[0];
       const lector = new FileReader();
@@ -75,6 +80,7 @@ createApp({
     JSON.parse(localStorage.getItem("products")) != null
       ? (this.products = JSON.parse(localStorage.getItem("products")))
       : localStorage.setItem("products", JSON.stringify(this.products));
+    if (!this.user) location.href = "../../index.html";
   },
   beforeUpdate() {},
   update() {},

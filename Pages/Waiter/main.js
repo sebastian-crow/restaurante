@@ -167,6 +167,7 @@ createApp({
   mounted() {
     this.loadDomiciliary();
     this.timeDomiciliary();
+    if (!this.user) location.href = "../../index.html";
   },
   beforeUpdate() {},
   update() {},
