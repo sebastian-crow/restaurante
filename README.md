@@ -34,7 +34,7 @@ $ open index.html
 
 ```bash
  # Netlify
- $ On it
+ $ https://sebastian-crow.github.io/restaurante
 ```
 
 ## License
