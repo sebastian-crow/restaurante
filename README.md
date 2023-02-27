@@ -47,6 +47,6 @@ MIT
 > [Andersson Cordoba](https://github.com/andersson980114)  
 > [Camilo Burbano](https://github.com/CamiloBurbano82)  <br> 
 > [Jean Carlos Carrillo](https://github.com/jeanc4rl02) <br> 
-> [Juan Gomez](https://github.com/JuansMgb) 
+> [Juan Gomez](https://github.com/JuansMgb) <br> 
 > [Luis Marín](https://github.com/Marin28c1997) <br> 
-> [Vannesa Jaimes](https://github.com/VanessaJaimes)
+> [Vanessa Jaimes](https://github.com/VanessaJaimes)
