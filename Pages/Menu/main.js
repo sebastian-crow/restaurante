@@ -51,7 +51,7 @@ createApp({
           content: [
             {
               id: 1,
-              img: "../../Utils/images/f7.png",
+              img: "https://mui.kitchen/__export/1617556046050/sites/muikitchen/img/2021/04/04/burger-868145_1280.jpg_1714320005.jpg",
               name: "Hamburger Sencilla",
               descriptionSm:
                 "Hamburguesa sencilla con carne, queso cheddar y tocineta",
@@ -61,7 +61,7 @@ createApp({
             },
             {
               id: 2,
-              img: "../../Utils/images/f8.png",
+              img: "https://www.infobae.com/new-resizer/xHORBTTOvi76_TX7OOanBUblR-0=/1200x900/filters:format(webp):quality(85)//arc-anglerfish-arc2-prod-infobae.s3.amazonaws.com/public/FJKXKQKMMJBV7KQ7XQ3YNFO7LU.jpg",
               name: "Hamburger Mediana",
               descriptionSm:
                 "Hamburguesa sencilla con carne, queso cheddar y tocineta",
@@ -71,7 +71,7 @@ createApp({
             },
             {
               id: 3,
-              img: "../../Utils/images/f7.png ",
+              img: "https://cdn2.cocinadelirante.com/sites/default/files/images/2020/11/receta-de-carne-para-hamburguesas-jugosas-caseras.jpg",
               name: "Hamburger Jumbo",
               descriptionSm:
                 "Hamburguesa sencilla con carne, queso cheddar y tocineta",
@@ -81,7 +81,7 @@ createApp({
             },
             {
               id: 4,
-              img: "../../Utils/images/f2.png",
+              img: "https://www.minervafoods.com/wp-content/uploads/2022/12/como_fazer_hamburguer_caseiro_1-1.jpg",
               name: "Hamburger DobleCarne",
               descriptionSm:
                 "Hamburguesa sencilla con carne, queso cheddar y tocineta",
